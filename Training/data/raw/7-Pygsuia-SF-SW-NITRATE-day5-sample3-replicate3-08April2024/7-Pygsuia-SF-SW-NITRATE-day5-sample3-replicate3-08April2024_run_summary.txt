@@ -1,0 +1,38 @@
+Run:
+	Mode:  AutoImage
+	Priming Method:  machine prime
+	Flow Rate:  0.150 ml/min
+	Recalibrations:  0
+	Stop Reason:  Particle Count
+	Sample Volume Aspirated: 0.1355 ml
+	Sample Volume Processed: 0.1310 ml
+	Fluid Volume Imaged: 0.0290 ml
+	Efficiency: 22.2%   
+	Particle Count: 1000
+
+Images:
+	Total:  889
+	Used:  592
+	Percentage Used:  66.59%
+	Particles Per Used Image:  1.69
+	Particles Per Image:  1.12
+	Particles Per Image:  1.12
+	Frame Rate:  16.98 fps
+	Intensity Mean:  177.42
+	Intensity Min:  176.84
+	Intensity Max:  178.01
+
+Date/Time:
+	Start:  2024-04-08 11:10:51
+	End:  2024-04-08 11:11:53
+	Sampling Time:  00:00:52
+
+Environment:
+	Software: VisualSpreadsheet 4.19.3
+	Magnification: 10X
+	Calibration Factor: 0.5544
+	Calibration Factor: 0.5544
+	SerialNo:  Unknown
+	Number of Processors: 8
+	Pump:  C70 Syringe
+	Syringe Size:  1.00 ml
