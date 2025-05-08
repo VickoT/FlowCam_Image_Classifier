@@ -94,7 +94,7 @@ def run_classifier(path_raw, path_model, path_extracted_imgs, path_pred_junk, pa
 
     for file in os.listdir(path_extracted_imgs):
         path_file = os.path.join(path_extracted_imgs, file)
-        ID = file.split('_')[1].split('.')[0]
+        ID = file.split('_')[-1].split('.')[0]
         prediction_series = df.loc[df['Original Reference ID'] == ID, "Predictions"]
 
         if not prediction_series.empty:
