@@ -1,0 +1,84 @@
+List File,7-Pygsuia-3LB-SFSW-Terasakiella-sample2-replicate1-day7-11Apr2025.lst
+Start Time,2025-04-11  15:53:33
+Sampling Time,4 min 15 sec
+
+Count,1000
+Particles / ml,7054
+
+Sample Volume Processed ml,0.6388
+Sample Volume Imaged ml,0.1418
+
+Efficiency,22.2%
+PPI,0.23
+
+Summary Stats,Mean,Min,Max,StdDev,% CV
+Area (ABD),8.76,0.92,416.05,20.50,233.89
+Area (Filled),8.82,0.92,416.05,20.51,232.42
+Aspect Ratio,0.38,0.03,0.98,0.29,76.21
+Average Blue,184.55,93.17,231.31,19.23,10.42
+Average Green,134.04,68.97,161.56,15.05,11.23
+Average Red,135.53,71.31,159.61,18.18,13.41
+Capture X,575.28,0.00,1260.00,339.01,58.93
+Capture Y,464.93,0.00,940.00,261.78,56.31
+Ch1 Area,0.00,0.00,0.00,0.00,0.00
+Ch1 Peak,0.00,0.00,0.00,0.00,0.00
+Ch1 Width,0.00,0.00,0.00,0.00,0.00
+Ch2 Area,0.00,0.00,0.00,0.00,0.00
+Ch2 Peak,0.00,0.00,0.00,0.00,0.00
+Ch2 Width,0.00,0.00,0.00,0.00,0.00
+Ch2/Ch1 Ratio,0.00,0.00,0.00,0.00,0.00
+Circle Fit,0.65,0.00,0.94,0.19,29.01
+Circularity,0.53,0.06,1.00,0.24,46.30
+Circularity (Hu),0.38,0.01,1.00,0.36,95.36
+Compactness,2.41,1.00,15.53,1.36,56.50
+Convex Perimeter,21.19,12.91,135.94,9.83,46.39
+Convexity,0.70,0.09,1.00,0.29,41.15
+D[3 2](ABD),6.83,1.08,23.02,5.05,74.01
+D[3 2](ESD),11.36,3.00,42.13,9.30,81.88
+D[4 3](ABD),10.57,1.08,23.02,6.51,61.54
+D[4 3](ESD),18.98,3.00,42.13,12.89,67.94
+Diameter (ABD),2.67,1.08,23.02,2.00,74.85
+Diameter (ESD),5.60,3.00,42.13,3.13,55.87
+Diameter (FD),2.68,1.08,23.02,2.01,74.75
+Edge Gradient,57.47,11.54,218.41,38.59,67.15
+Elapsed Time,134.92,2.94,257.33,72.86,54.00
+Elongation,5.30,1.00,46.77,4.39,82.87
+Fiber Curl,0.13,0.00,1.74,0.24,181.65
+Fiber Straightness,1.16,0.37,4.80,0.53,45.26
+Geodesic Aspect Ratio,0.38,0.02,1.00,0.34,88.91
+Geodesic Length,7.96,3.21,130.10,7.03,88.34
+Geodesic Thickness,2.48,0.60,12.06,2.02,81.63
+Image Height,26.42,12.00,98.00,8.56,32.42
+Image Width,22.81,12.00,86.00,6.40,28.05
+Intensity,149.31,76.45,176.44,14.77,9.89
+Length,8.34,3.60,54.05,4.60,55.11
+Particles Per Chain,1.56,1.00,4.00,0.56,36.09
+Perimeter,20.88,10.44,268.05,14.68,70.27
+Ratio Blue/Green,1.39,1.10,2.14,0.15,10.96
+Ratio Red/Blue,0.74,0.40,1.06,0.10,13.25
+Ratio Red/Green,1.01,0.74,1.27,0.06,6.27
+Roughness,1.01,0.23,2.20,0.29,28.58
+Scatter Area,0.00,0.00,0.00,0.00,0.00
+Scatter Peak,0.00,0.00,0.00,0.00,0.00
+Scatter Width,0.00,0.00,0.00,0.00,0.00
+Sigma Intensity,9.91,1.92,46.22,7.00,70.71
+Sphere Complement,0.00,0.00,0.00,0.00,0.00
+Sphere Count,0.00,0.00,0.00,0.00,0.00
+Sphere Unknown,0.00,0.00,0.00,0.00,0.00
+Sphere Volume,0.00,0.00,0.00,0.00,0.00
+Sum Intensity,9496.76,1888.00,2.106e+05,12255.30,129.05
+Symmetry,0.60,0.00,1.00,0.22,37.27
+Transparency,0.50,0.04,0.93,0.25,50.83
+Volume (ABD),39.90,0.67,6383.95,236.00,591.48
+Volume (ESD),244.57,14.18,39165.99,1491.30,609.77
+Width,2.42,0.55,30.21,2.00,82.78
+
+Particle Segmentation,Dark Threshold 20.00
+Distance to Nearest Neighbor,5.00 microns
+Close Holes,1 iterations
+Basic Size Filter,Diameter (ESD) Min 3.00  Max 50.00  microns
+Advanced Filter,None
+AutoImage Frame Rate,17 frames per second
+Flash Duration,70.00 microseconds
+Camera Gain,30
+
