@@ -30,10 +30,68 @@ class FlowCamPaths:
         os.makedirs(self.predicted_missed_dir)
         os.makedirs(self.predicted_protist_dir)
 
+class FlowCamReportGenerator:
+    def __init__(self, raw_dir, output_dir, predicted_dirs):
+        self.raw_dir = raw_dir
+        self.output_dir = output_dir
+        self.predicted_junk_dir = predicted_dirs["junk"]
+        self.predicted_missed_dir = predicted_dirs["missed"]
+        self.predicted_protist_dir = predicted_dirs["protist"]
+        self.sample_name = os.path.basename(os.path.normpath(raw_dir))
+        self.sample_volume = self._get_sample_volume()
+
+    # '_' is used to indicate that this method is private
+    def _get_sample_volume(self):
+        # DEAL WITH ERRORS
+        summary_files = [file for file in os.listdir(self.raw_dir) if file.endswith("_summary.csv")]
+        for summary_file in summary_files:
+            with open(os.path.join(self.raw_dir, summary_file), 'r') as file:
+                for line in file:
+                    if 'Sample Volume Imaged ml' in line:
+                        return float(line.split(',')[1].strip())
+
+    def generate_report(self):
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M")
+        count_junk = len(os.listdir(self.predicted_junk_dir))
+        count_missed = len(os.listdir(self.predicted_missed_dir))
+        count_protist = len(os.listdir(self.predicted_protist_dir))
+
+        report_content = [
+            f" Report - {self.sample_name} \t ({current_time})",
+            "=========================",
+            f"Sample Volume Imaged (ml): {self.sample_volume}",
+            "\nCategories",
+            f"Junk: {count_junk}",
+            f"Missed: {count_missed}",
+            f"Protist: {count_protist}",
+            f"\nEstimated conc. (protists/ml): {count_protist / self.sample_volume:.2f}",
+            f"\n{self.sample_name}\t{self.sample_volume}\t{count_junk}\t{count_missed}\t{count_protist}\t{count_protist / self.sample_volume:.2f}"
+        ]
+
+        with open(os.path.join(self.output_dir, 'report.txt'), 'w') as report_file:
+            for line in report_content:
+                report_file.write(line + '\n')
+
+        print(f"Report created for {self.sample_name} in 'Output' directory")
+
 class FlowCamProcessor:
     def __init__(self, raw_dir):
         self.paths = FlowCamPaths(raw_dir)
         self.paths.prepare_output_dirs()
+
+    def generate_report(self):
+        predicted_dirs = {
+            "junk": self.paths.predicted_junk_dir,
+            "missed": self.paths.predicted_missed_dir,
+            "protist": self.paths.predicted_protist_dir
+        }
+
+        report_generator = FlowCamReportGenerator(
+            self.paths.raw_dir,
+            self.paths.output_dir,
+            predicted_dirs
+        )
+        report_generator.generate_report()
 
     def run(self):
         image_separator(self.paths.raw_dir, self.paths.extract_dir)
@@ -42,14 +100,9 @@ class FlowCamProcessor:
             self.paths.extract_dir, self.paths.predicted_junk_dir,
             self.paths.predicted_missed_dir, self.paths.predicted_protist_dir
         )
-        report_file(
-            self.paths.raw_dir, self.paths.output_dir,
-            self.paths.predicted_junk_dir, self.paths.predicted_missed_dir,
-            self.paths.predicted_protist_dir
-        )
-        # Add other processing steps here
 
-    
+        self.generate_report()
+
 
 def image_separator(path_raw, path_extracted_imgs):
     try:
