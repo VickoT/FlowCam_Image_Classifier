@@ -8,6 +8,7 @@ import joblib
 from datetime import datetime
 
 class FlowCamPaths:
+
     def __init__(self, raw_dir):
         self.raw_dir = os.path.abspath(raw_dir)
         self.sample_name = os.path.basename(self.raw_dir)
@@ -20,6 +21,14 @@ class FlowCamPaths:
         self.script_path = os.path.dirname(os.path.abspath(__file__))
         self.model_path = os.path.join(self.script_path, 'trained_gbc_model.pkl')
 
+    @property
+    def predicted_dirs(self):
+        return {
+            "Junk": self.predicted_junk_dir,
+            "Missed": self.predicted_missed_dir,
+            "Protist": self.predicted_protist_dir
+        }
+
     def prepare_output_dirs(self):
         if os.path.exists(self.output_dir):
             shutil.rmtree(self.output_dir)
@@ -30,13 +39,15 @@ class FlowCamPaths:
         os.makedirs(self.predicted_missed_dir)
         os.makedirs(self.predicted_protist_dir)
 
+# Can update the predicted_dirs now when I have the decorator
 class FlowCamReportGenerator:
+
     def __init__(self, raw_dir, output_dir, predicted_dirs):
         self.raw_dir = raw_dir
         self.output_dir = output_dir
-        self.predicted_junk_dir = predicted_dirs["junk"]
-        self.predicted_missed_dir = predicted_dirs["missed"]
-        self.predicted_protist_dir = predicted_dirs["protist"]
+        self.predicted_junk_dir = predicted_dirs["Junk"]
+        self.predicted_missed_dir = predicted_dirs["Missed"]
+        self.predicted_protist_dir = predicted_dirs["Protist"]
         self.sample_name = os.path.basename(os.path.normpath(raw_dir))
         self.sample_volume = self._get_sample_volume()
 
@@ -75,21 +86,16 @@ class FlowCamReportGenerator:
         print(f"Report created for {self.sample_name} in 'Output' directory")
 
 class FlowCamProcessor:
+
     def __init__(self, raw_dir):
         self.paths = FlowCamPaths(raw_dir)
         self.paths.prepare_output_dirs()
 
     def generate_report(self):
-        predicted_dirs = {
-            "junk": self.paths.predicted_junk_dir,
-            "missed": self.paths.predicted_missed_dir,
-            "protist": self.paths.predicted_protist_dir
-        }
-
         report_generator = FlowCamReportGenerator(
             self.paths.raw_dir,
             self.paths.output_dir,
-            predicted_dirs
+            self.paths.predicted_dirs
         )
         report_generator.generate_report()
 
@@ -147,16 +153,10 @@ class FlowCamProcessor:
 
             if not prediction_series.empty:
                 prediction = prediction_series.iloc[0]
-                if prediction == 'Protist':
-                    dest_path = os.path.join(self.paths.predicted_protist_dir, file)
-                elif prediction == 'Junk':
-                    dest_path = os.path.join(self.paths.predicted_junk_dir, file)
-                elif prediction == 'Missed':
-                    dest_path = os.path.join(self.paths.predicted_missed_dir, file)
-                else:
-                    continue
+                if prediction in self.paths.predicted_dirs:
+                    dest_path = os.path.join(self.paths.predicted_dirs[prediction], file)
+                    shutil.move(path_file, dest_path)
 
-                shutil.move(path_file, dest_path)
         os.rmdir(self.paths.extract_dir)
         print("Images predicted and sorted in 'Prediction' directory.\n")
 
